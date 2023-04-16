@@ -7,7 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write ."
+    "format": "prettier --write .",
+    "prepare": "husky install"
+  },
+  "lint-staged": {
+    "**/*": "prettier --write --ignore-unknown"
   },
   "dependencies": {
     "@types/node": "18.15.11",
@@ -26,6 +30,8 @@
   },
   "devDependencies": {
     "@tailwindcss/typography": "^0.5.9",
+    "husky": "^8.0.3",
+    "lint-staged": "^13.2.1",
     "prettier": "^2.8.7",
     "prettier-plugin-tailwindcss": "^0.2.7"
   }
