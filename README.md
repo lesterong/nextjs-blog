@@ -1,1 +1,1 @@
-This repository serves as the modified base template for my blog at [thoughts.lesterong.com](https://thoughts.lesterong.com)
+This repository serves as the modified base template for my blog at [blog.lesterong.com](https://blog.lesterong.com)
