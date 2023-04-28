@@ -1,6 +1,9 @@
 import { getAllPosts } from '../../utils/api';
 import Post from '../../types/post.type';
 import { GetStaticProps } from 'next';
+import Link from 'next/link';
+import DateTime from '../../components/DateTime';
+import Tag from '../../components/Tag';
 
 const HomePage = ({ posts }: { posts: Post[] }) => {
   return (
@@ -10,12 +13,12 @@ const HomePage = ({ posts }: { posts: Post[] }) => {
         return (
           <article key={post.slug} className="border-b border-b-base-content/20 py-6 last:border-0">
             <header className="mb-2">
-              <h2 className="text-xl font-bold">{post.title}</h2>
-              <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-xs font-semibold text-transparent">
-                {post.tag.toUpperCase()}
-              </span>
+              <Link href={`posts/${post.slug}`} className="link-hover link">
+                <h2 className="text-xl font-bold">{post.title}</h2>
+              </Link>
+              <Tag tag={post.tag} />
               <span className="text-sm">&nbsp;&#183;&nbsp;</span>
-              <span className="font-mono text-xs">{date.toUpperCase()}</span>
+              <DateTime date={post.date} />
             </header>
             <p className="text-base-content/80">{post.summary}</p>
           </article>
