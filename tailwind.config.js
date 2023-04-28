@@ -6,8 +6,8 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   daisyui: {
-    themes: ['winter', 'halloween'],
-    darkTheme: 'halloween',
+    themes: ['winter', 'forest'],
+    darkTheme: 'forest',
   },
   theme: {
     container: {
