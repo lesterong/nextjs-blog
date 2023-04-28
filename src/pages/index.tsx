@@ -2,8 +2,8 @@ import { getAllPosts } from '../../utils/api';
 import Post from '../../types/post.type';
 import { GetStaticProps } from 'next';
 import Link from 'next/link';
-import DateTime from '../../components/DateTime';
-import Tag from '../../components/Tag';
+import DateTime from '../components/DateTime';
+import Tag from '../components/Tag';
 
 const HomePage = ({ posts }: { posts: Post[] }) => {
   return (

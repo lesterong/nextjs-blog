@@ -1,0 +1,13 @@
+import Link from 'next/link';
+
+const Navbar = () => {
+  return (
+    <nav className="flex justify-center">
+      <Link href="/" className="my-4 text-4xl">
+        Blog Title
+      </Link>
+    </nav>
+  );
+};
+
+export default Navbar;
