@@ -4,6 +4,7 @@ import PostCard from '@/components/PostCard';
 import { SITE_TITLE } from '../../../lib/constants';
 import Head from 'next/head';
 import { toTitleCase } from '../../../lib/utils';
+import Heading from '@/components/Heading';
 
 type Props = {
   tag: string;
@@ -18,7 +19,7 @@ const TagPage = ({ tag, posts }: Props) => {
         <meta name="description" content={`In ${toTitleCase(tag)}`} />
       </Head>
       <div className="container mx-auto max-w-4xl px-6">
-        <h1 className="text-gradient mt-6 w-fit text-4xl font-bold capitalize">{tag}</h1>
+        <Heading title={tag} />
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} hideTag />
         ))}

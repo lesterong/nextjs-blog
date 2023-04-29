@@ -1,10 +1,12 @@
 import Link from 'next/link';
 import Logo from '@/components/Logo';
 import { Figtree } from 'next/font/google';
+import { useRouter } from 'next/router';
 
 const figtree = Figtree({ subsets: ['latin'] });
 
 const Navbar = () => {
+  const router = useRouter();
   return (
     <nav
       className={`container flex max-w-4xl items-center justify-between px-6 ${figtree.className}`}
@@ -14,9 +16,14 @@ const Navbar = () => {
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <span className="font-bold uppercase">blog</span>
       </Link>
-      <Link href="https://www.github.com/lesterong/nextjs-blog" className="link-underline link">
-        GitHub
-      </Link>
+      <div className="flex space-x-3">
+        <Link
+          href="/tags"
+          className={`link-underline link ${router.pathname === '/tags' && 'text-primary'}`}
+        >
+          Tags
+        </Link>
+      </div>
     </nav>
   );
 };
