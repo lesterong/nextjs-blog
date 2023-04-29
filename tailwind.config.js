@@ -16,6 +16,12 @@ module.exports = {
         DEFAULT: '1rem',
       },
     },
+    extend: {
+      transitionProperty: {
+        height: 'height',
+        width: 'width',
+      },
+    },
   },
   plugins: [require('@tailwindcss/typography'), require('daisyui')],
 };

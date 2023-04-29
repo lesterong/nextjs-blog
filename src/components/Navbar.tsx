@@ -14,10 +14,7 @@ const Navbar = () => {
         &nbsp;&nbsp;|&nbsp;&nbsp;
         <span className="font-bold uppercase">blog</span>
       </Link>
-      <Link
-        href="https://www.github.com/lesterong/nextjs-blog"
-        className="link-hover link-primary link"
-      >
+      <Link href="https://www.github.com/lesterong/nextjs-blog" className="link-underline link">
         GitHub
       </Link>
     </nav>
