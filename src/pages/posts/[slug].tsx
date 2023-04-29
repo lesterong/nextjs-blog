@@ -5,10 +5,13 @@ import Tag from '../../components/Tag';
 import DateTime from '../../components/DateTime';
 import Head from 'next/head';
 import { SITE_TITLE } from '../../../lib/constants';
+import SyntaxHighlighter from 'react-syntax-highlighter';
+import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
 
 type Props = {
   post: Post;
 };
+
 const PostPage = ({ post }: Props) => {
   return (
     <>
@@ -24,7 +27,28 @@ const PostPage = ({ post }: Props) => {
           <h1 className="text-4xl font-bold">{post.title}</h1>
         </header>
         <div className="prose">
-          <ReactMarkdown>{post.content}</ReactMarkdown>
+          <ReactMarkdown
+            components={{
+              // https://github.com/orgs/remarkjs/discussions/684#discussioncomment-616455
+              pre({ node, ...props }) {
+                return <>{props.children}</>;
+              },
+              code({ node, inline, className, children, ...props }) {
+                const match = /language-(\w+)/.exec(className || '');
+                return !inline && match ? (
+                  <SyntaxHighlighter language={match[1]} style={atomOneDark} showLineNumbers>
+                    {String(children).replace(/\n$/, '')}
+                  </SyntaxHighlighter>
+                ) : (
+                  <code {...props} className={className}>
+                    {children}
+                  </code>
+                );
+              },
+            }}
+          >
+            {post.content}
+          </ReactMarkdown>
         </div>
       </article>
     </>
