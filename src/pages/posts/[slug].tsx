@@ -1,25 +1,33 @@
-import { getPostBySlug, getPostsSlugs } from '../../../utils/api';
+import { getPostBySlug, getPostsSlugs } from '../../../lib/api';
 import Post from '../../../types/post.type';
 import ReactMarkdown from 'react-markdown';
 import Tag from '../../components/Tag';
 import DateTime from '../../components/DateTime';
+import Head from 'next/head';
+import { SITE_TITLE } from '../../../lib/constants';
 
 type Props = {
   post: Post;
 };
 const PostPage = ({ post }: Props) => {
   return (
-    <article className="container max-w-2xl">
-      <header className="my-4">
-        <Tag tag={post.tag} />
-        <span className="text-sm">&nbsp;&#183;&nbsp;</span>
-        <DateTime date={post.date} />
-        <h1 className="text-4xl font-bold">{post.title}</h1>
-      </header>
-      <div className="prose">
-        <ReactMarkdown>{post.content}</ReactMarkdown>
-      </div>
-    </article>
+    <>
+      <Head>
+        <title>{`${post.title} | ${SITE_TITLE}`}</title>
+        <meta name="description" content={post.summary} />
+      </Head>
+      <article className="container max-w-2xl">
+        <header className="my-4">
+          <Tag tag={post.tag} />
+          <span className="text-sm">&nbsp;&#183;&nbsp;</span>
+          <DateTime date={post.date} />
+          <h1 className="text-4xl font-bold">{post.title}</h1>
+        </header>
+        <div className="prose">
+          <ReactMarkdown>{post.content}</ReactMarkdown>
+        </div>
+      </article>
+    </>
   );
 };
 
