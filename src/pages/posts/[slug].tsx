@@ -16,7 +16,7 @@ const PostPage = ({ post }: Props) => {
         <title>{`${post.title} | ${SITE_TITLE}`}</title>
         <meta name="description" content={post.summary} />
       </Head>
-      <article className="container max-w-2xl">
+      <article className="container mb-6 max-w-2xl">
         <header className="my-4">
           <Tag tag={post.tag} />
           <span className="text-sm">&nbsp;&#183;&nbsp;</span>
