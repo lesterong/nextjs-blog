@@ -6,7 +6,7 @@ import Footer from '@/components/Footer';
 
 const inter = Inter({ subsets: ['latin'] });
 
-export default function App({ Component, pageProps }: AppProps) {
+const App = ({ Component, pageProps }: AppProps) => {
   return (
     <main className={inter.className}>
       <Navbar />
@@ -14,4 +14,6 @@ export default function App({ Component, pageProps }: AppProps) {
       <Footer />
     </main>
   );
-}
+};
+
+export default App;

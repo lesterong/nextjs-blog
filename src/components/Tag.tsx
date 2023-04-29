@@ -1,8 +1,17 @@
-const Tag = ({ tag }: { tag: string }) => {
+import Link from 'next/link';
+
+type Props = {
+  tag: string;
+};
+
+const Tag = ({ tag }: Props) => {
   return (
-    <span className="bg-gradient-to-r from-primary to-secondary bg-clip-text text-xs font-semibold uppercase text-transparent">
+    <Link
+      href={`/tags/${tag}`}
+      className="text-gradient text-xs font-semibold uppercase hover:border-b"
+    >
       {tag}
-    </span>
+    </Link>
   );
 };
 

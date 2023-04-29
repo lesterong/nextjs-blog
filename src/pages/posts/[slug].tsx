@@ -1,9 +1,8 @@
-import { getAllPosts, getPostBySlug, getPostsSlugs } from '../../../utils/api';
+import { getPostBySlug, getPostsSlugs } from '../../../utils/api';
 import Post from '../../../types/post.type';
 import ReactMarkdown from 'react-markdown';
 import Tag from '../../components/Tag';
 import DateTime from '../../components/DateTime';
-import Navbar from '../../components/Navbar';
 
 type Props = {
   post: Post;
