@@ -37,3 +37,13 @@ export const getAllPosts = () => {
     .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (post1.date < post2.date ? 1 : -1));
 };
+
+export const getPostsTags = () => {
+  const tags = getAllPosts().map((post) => post.tag);
+  return Array.from(new Set(tags));
+};
+
+export const getPostsByTag = (tag: string) => {
+  const posts = getAllPosts();
+  return posts.filter((post) => post.tag === tag);
+};
