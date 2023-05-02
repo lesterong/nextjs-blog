@@ -2,16 +2,22 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer className="absolute bottom-4 w-full space-x-4 text-center text-sm">
-      <Link className="link-primary" href="https://www.lesterong.com">
+    <footer
+      className={`container mt-2 flex max-w-4xl items-center justify-between px-6 py-4 text-xs`}
+    >
+      <Link className="link-fill text-primary" target="_blank" href="https://www.lesterong.com">
         lesterong.com
       </Link>
-      <Link className="link-primary" href="https://github.com/lesterong">
-        GitHub
-      </Link>
-      <Link className="link-primary" href="https://linkedin.com/in/lesterongpc">
-        LinkedIn
-      </Link>
+      <div>
+        <Link
+          href="https://github.com/lesterong/nextjs-blog"
+          target="_blank"
+          className="link-fill text-primary"
+        >
+          nextjs-blog
+        </Link>
+        &nbsp;by Lester Ong.
+      </div>
     </footer>
   );
 };
