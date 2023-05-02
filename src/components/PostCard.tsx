@@ -10,7 +10,10 @@ type Props = {
 
 const PostCard = ({ post, hideTag = false }: Props) => {
   return (
-    <article key={post.slug} className="border-b border-b-base-content/20 py-6 last:border-0">
+    <article
+      key={post.slug}
+      className="border-b border-b-base-content/20 py-6 last-of-type:border-0"
+    >
       <header className="mb-2">
         <Link href={`/posts/${post.slug}`} className="link-underline link">
           <h2 className="text-xl font-bold">{post.title}</h2>
