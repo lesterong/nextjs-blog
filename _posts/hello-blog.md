@@ -15,7 +15,6 @@ This blog `v0.1.0` currently supports the following features:
 
 The following features are currently being worked on:
 
-- Improved link handling in rendered markdown. Currently, links are rendered as an <a> tag, and will trigger a page refresh, even for internal links
 - Theme toggle. Currently, the theme follows the system preferences, and cannot be toggled manually
 - Table of contents when viewing posts
 - Navigation between posts
