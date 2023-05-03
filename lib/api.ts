@@ -1,9 +1,12 @@
 import fs from 'fs';
 import matter from 'gray-matter';
+import Post from '../types/post.type';
 
 const POST_DIRECTORY = '_posts';
 const POSTS_PER_PAGE = 8;
 const POSTS_LATEST = 5;
+
+let cacheAllPosts: Post[] = [];
 
 /**
  * Gets an array of strings of the post slugs.
@@ -34,10 +37,16 @@ export const getPostBySlug = (slug: string) => {
  * Gets all posts excluding drafts, sorted by latest date first.
  */
 export const getAllPosts = () => {
+  if (cacheAllPosts.length != 0) {
+    return cacheAllPosts;
+  }
+
   const slugs = getPostsSlugs();
-  return slugs
+  const posts = slugs
     .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (post1.date < post2.date ? 1 : -1));
+  cacheAllPosts = posts;
+  return posts;
 };
 
 export const getPostsTags = () => {
@@ -74,4 +83,16 @@ export const getArchivedPostsByPage = (page: number) => {
 export const getNumberOfArchivedPages = () => {
   const numOfPostsToIndex = getArchivedPosts().length;
   return Math.ceil(numOfPostsToIndex / POSTS_PER_PAGE) || 1;
+};
+
+export const getNumberOfPagesByTag = (tag: string) => {
+  const numOfPosts = getPostsByTag(tag).length;
+  return Math.ceil(numOfPosts / POSTS_PER_PAGE) || 1;
+};
+
+export const getPostsByTagAndPage = (page: number, tag: string) => {
+  const posts = getPostsByTag(tag);
+  const startIndex = (page - 1) * POSTS_PER_PAGE;
+  const endIndex = page * POSTS_PER_PAGE;
+  return posts.slice(startIndex, endIndex);
 };
