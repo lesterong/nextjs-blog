@@ -1,7 +1,6 @@
 import { getPostsTags } from '../../../lib/api';
 import Link from 'next/link';
 import Heading from '@/components/Heading';
-import { toTitleCase } from '../../../lib/utils';
 import { SITE_TITLE } from '../../../lib/constants';
 import Head from 'next/head';
 

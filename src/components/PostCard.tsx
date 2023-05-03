@@ -10,8 +10,11 @@ type Props = {
 
 const PostCard = ({ post, hideTag = false }: Props) => {
   return (
-    <article key={post.slug} className="border-b border-b-base-content/20 py-6 last:border-0">
-      <header className="mb-2">
+    <article
+      key={post.slug}
+      className="border-b border-b-base-content/20 py-6 last-of-type:border-0"
+    >
+      <header className="mb-1">
         <Link href={`/posts/${post.slug}`} className="link-underline link">
           <h2 className="text-xl font-bold">{post.title}</h2>
         </Link>
@@ -25,7 +28,7 @@ const PostCard = ({ post, hideTag = false }: Props) => {
           <DateTime date={post.date} />
         </div>
       </header>
-      <p className="text-base-content/80">{post.summary}</p>
+      <p className="text-sm text-base-content/80">{post.summary}</p>
     </article>
   );
 };

@@ -2,9 +2,7 @@ import Link from 'next/link';
 
 const Footer = () => {
   return (
-    <footer
-      className={`container mt-2 flex max-w-4xl items-center justify-between px-6 py-4 text-xs`}
-    >
+    <footer className="container mt-2 flex max-w-4xl items-center justify-between px-6 py-4 text-xs">
       <Link className="link-fill text-primary" target="_blank" href="https://www.lesterong.com">
         lesterong.com
       </Link>

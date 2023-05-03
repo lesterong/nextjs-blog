@@ -2,18 +2,14 @@ import fs from 'fs';
 import matter from 'gray-matter';
 
 const POST_DIRECTORY = '_posts';
+const POSTS_PER_PAGE = 5;
+const POSTS_LATEST = 3;
 
-/**
- * Gets an array of strings of the post slugs.
- */
 export const getPostsSlugs = (): string[] => {
   const files = fs.readdirSync(POST_DIRECTORY);
   return files.map((filename) => filename.replace('.md', ''));
 };
 
-/**
- * Gets a post from a specified slug.
- */
 export const getPostBySlug = (slug: string) => {
   const file = fs.readFileSync(`${POST_DIRECTORY}/${slug}.md`, 'utf-8');
   const { data, content } = matter(file);
@@ -22,15 +18,12 @@ export const getPostBySlug = (slug: string) => {
     slug,
     title,
     date,
-    tag,
+    tag: tag.toLowerCase(), // case-insensitive tag
     summary,
     content,
   };
 };
 
-/**
- * Gets all posts excluding drafts, sorted by latest date first.
- */
 export const getAllPosts = () => {
   const slugs = getPostsSlugs();
   return slugs
@@ -46,4 +39,42 @@ export const getPostsTags = () => {
 export const getPostsByTag = (tag: string) => {
   const posts = getAllPosts();
   return posts.filter((post) => post.tag === tag);
+};
+
+export const getLatestPosts = () => {
+  const posts = getAllPosts();
+  return posts.slice(0, POSTS_LATEST);
+};
+
+export const getArchivedPosts = () => {
+  const posts = getAllPosts();
+  return posts.slice(POSTS_LATEST);
+};
+
+export const hasArchivedPosts = () => {
+  return getArchivedPosts().length > 0;
+};
+
+export const getArchivedPostsByPage = (page: number) => {
+  const posts = getArchivedPosts();
+  const startIndex = (page - 1) * POSTS_PER_PAGE;
+  const endIndex = page * POSTS_PER_PAGE;
+  return posts.slice(startIndex, endIndex);
+};
+
+export const getNumberOfArchivedPages = () => {
+  const numOfPostsToIndex = getArchivedPosts().length;
+  return Math.ceil(numOfPostsToIndex / POSTS_PER_PAGE) || 1;
+};
+
+export const getNumberOfPagesByTag = (tag: string) => {
+  const numOfPosts = getPostsByTag(tag).length;
+  return Math.ceil(numOfPosts / POSTS_PER_PAGE) || 1;
+};
+
+export const getPostsByTagAndPage = (page: number, tag: string) => {
+  const posts = getPostsByTag(tag);
+  const startIndex = (page - 1) * POSTS_PER_PAGE;
+  const endIndex = page * POSTS_PER_PAGE;
+  return posts.slice(startIndex, endIndex);
 };

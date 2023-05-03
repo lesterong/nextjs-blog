@@ -1,15 +1,17 @@
-import { getAllPosts } from '../../lib/api';
+import { getLatestPosts, hasArchivedPosts } from '../../lib/api';
 import Post from '../../types/post.type';
 import PostCard from '@/components/PostCard';
 import { SITE_TITLE } from '../../lib/constants';
 import Head from 'next/head';
 import Heading from '@/components/Heading';
+import Link from 'next/link';
 
 type Props = {
   posts: Post[];
+  hasArchives: boolean;
 };
 
-const HomePage = ({ posts }: Props) => {
+const HomePage = ({ posts, hasArchives }: Props) => {
   return (
     <>
       <Head>
@@ -24,6 +26,11 @@ const HomePage = ({ posts }: Props) => {
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
+        {hasArchives && (
+          <Link href="/archives/1" className="btn-sm btn my-4 rounded-lg normal-case">
+            View more
+          </Link>
+        )}
       </div>
     </>
   );
@@ -32,10 +39,12 @@ const HomePage = ({ posts }: Props) => {
 export default HomePage;
 
 export const getStaticProps = async () => {
-  const posts = getAllPosts();
+  const posts = getLatestPosts();
+  const hasArchives = hasArchivedPosts();
   return {
     props: {
       posts,
+      hasArchives,
     },
   };
 };
