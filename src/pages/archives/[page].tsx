@@ -4,7 +4,7 @@ import { SITE_TITLE } from '../../../lib/constants';
 import Heading from '@/components/Heading';
 import PostCard from '@/components/PostCard';
 import Post from '../../../types/post.type';
-import Link from 'next/link';
+import PageNav from '@/components/PageNav';
 
 type Props = {
   posts: Post[];
@@ -24,21 +24,7 @@ const PaginatedPage = ({ posts, page, totalPages }: Props) => {
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
-        <div className="my-4">
-          {page > 1 && (
-            <Link href={`${page - 1}`} className="btn-sm btn rounded-l-lg rounded-r-none">
-              {'<'}
-            </Link>
-          )}
-          <button className="btn-sm btn rounded-none normal-case first:rounded-l-lg last:rounded-r-lg">
-            Page {page} of {totalPages}
-          </button>
-          {page !== totalPages && (
-            <Link href={`${page + 1}`} className="btn-sm btn rounded-l-none rounded-r-lg">
-              {'>'}
-            </Link>
-          )}
-        </div>
+        <PageNav page={page} totalPages={totalPages} renderPageLink={(page) => `${page}`} />
       </div>
     </>
   );

@@ -1,16 +1,11 @@
-import {
-  getNumberOfPagesByTag,
-  getPostsByTag,
-  getPostsByTagAndPage,
-  getPostsTags,
-} from '../../../../lib/api';
+import { getNumberOfPagesByTag, getPostsByTagAndPage, getPostsTags } from '../../../../lib/api';
 import Post from '../../../../types/post.type';
 import PostCard from '@/components/PostCard';
 import { SITE_TITLE } from '../../../../lib/constants';
 import Head from 'next/head';
 import { toTitleCase } from '../../../../lib/utils';
 import Heading from '@/components/Heading';
-import Link from 'next/link';
+import PageNav from '@/components/PageNav';
 
 type Props = {
   tag: string;
@@ -30,16 +25,7 @@ const TagPage = ({ tag, posts, totalPages }: Props) => {
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
-        <div className="my-4">
-          <button className="btn-sm btn rounded-none normal-case first:rounded-l-lg last:rounded-r-lg">
-            Page 1 of {totalPages}
-          </button>
-          {1 !== totalPages && (
-            <Link href={`${tag}/2`} className="btn-sm btn rounded-l-none rounded-r-lg">
-              {'>'}
-            </Link>
-          )}
-        </div>
+        <PageNav page={1} totalPages={totalPages} renderPageLink={(page) => `${tag}/${page}`} />
       </div>
     </>
   );

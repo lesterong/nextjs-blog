@@ -7,7 +7,7 @@ body {
 }
 
 .text-gradient {
-  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text text-transparent selection:text-base-content;
+  @apply bg-gradient-to-r from-primary to-secondary bg-clip-text py-0.5 text-transparent selection:text-base-content;
 }
 
 .link-fill {
