@@ -7,6 +7,7 @@ import Head from 'next/head';
 import { SITE_TITLE } from '../../../lib/constants';
 import SyntaxHighlighter from 'react-syntax-highlighter';
 import { atomOneDark } from 'react-syntax-highlighter/dist/cjs/styles/hljs';
+import Link from 'next/link';
 
 type Props = {
   post: Post;
@@ -40,10 +41,16 @@ const PostPage = ({ post }: Props) => {
                     {String(children).replace(/\n$/, '')}
                   </SyntaxHighlighter>
                 ) : (
-                  <code {...props} className={className}>
+                  <code
+                    {...props}
+                    className={`${className} rounded-md bg-[#FAFAFA] dark:bg-[#282C34]`}
+                  >
                     {children}
                   </code>
                 );
+              },
+              a({ href, children }) {
+                return <Link href={String(href)}>{children}</Link>;
               },
             }}
           >
