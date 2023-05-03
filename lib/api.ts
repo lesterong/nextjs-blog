@@ -1,24 +1,15 @@
 import fs from 'fs';
 import matter from 'gray-matter';
-import Post from '../types/post.type';
 
 const POST_DIRECTORY = '_posts';
-const POSTS_PER_PAGE = 8;
-const POSTS_LATEST = 5;
+const POSTS_PER_PAGE = 5;
+const POSTS_LATEST = 3;
 
-let cacheAllPosts: Post[] = [];
-
-/**
- * Gets an array of strings of the post slugs.
- */
 export const getPostsSlugs = (): string[] => {
   const files = fs.readdirSync(POST_DIRECTORY);
   return files.map((filename) => filename.replace('.md', ''));
 };
 
-/**
- * Gets a post from a specified slug.
- */
 export const getPostBySlug = (slug: string) => {
   const file = fs.readFileSync(`${POST_DIRECTORY}/${slug}.md`, 'utf-8');
   const { data, content } = matter(file);
@@ -27,26 +18,17 @@ export const getPostBySlug = (slug: string) => {
     slug,
     title,
     date,
-    tag,
+    tag: tag.toLowerCase(), // case-insensitive tag
     summary,
     content,
   };
 };
 
-/**
- * Gets all posts excluding drafts, sorted by latest date first.
- */
 export const getAllPosts = () => {
-  if (cacheAllPosts.length != 0) {
-    return cacheAllPosts;
-  }
-
   const slugs = getPostsSlugs();
-  const posts = slugs
+  return slugs
     .map((slug) => getPostBySlug(slug))
     .sort((post1, post2) => (post1.date < post2.date ? 1 : -1));
-  cacheAllPosts = posts;
-  return posts;
 };
 
 export const getPostsTags = () => {
