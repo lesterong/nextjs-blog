@@ -5,6 +5,8 @@ import Heading from '@/components/Heading';
 import PostCard from '@/components/PostCard';
 import Post from '../../../types/post.type';
 import PageNav from '@/components/PageNav';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 type Props = {
   posts: Post[];
@@ -13,6 +15,13 @@ type Props = {
 };
 
 const PaginatedPage = ({ posts, page, totalPages }: Props) => {
+  const { replace } = useRouter();
+  useEffect(() => {
+    if (posts.length === 0) {
+      void replace('/');
+    }
+  });
+
   return (
     <>
       <Head>
@@ -54,15 +63,6 @@ export const getStaticProps = async ({ params }: { params: { page: string } }) =
   const page = Number(params.page) || 1;
   const totalPages = getNumberOfArchivedPages();
   const posts = getArchivedPostsByPage(page);
-
-  if (posts.length === 0) {
-    return {
-      redirect: {
-        destination: '/',
-        permanent: false,
-      },
-    };
-  }
 
   return {
     props: {

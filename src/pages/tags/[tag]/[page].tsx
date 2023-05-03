@@ -6,6 +6,8 @@ import Post from '../../../../types/post.type';
 import PostCard from '@/components/PostCard';
 import { toTitleCase } from '../../../../lib/utils';
 import PageNav from '@/components/PageNav';
+import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 type Props = {
   posts: Post[];
@@ -15,6 +17,13 @@ type Props = {
 };
 
 const PaginatedPage = ({ posts, page, totalPages, tag }: Props) => {
+  const { replace } = useRouter();
+  useEffect(() => {
+    if (page === 1) {
+      void replace(`/tags/${tag}`);
+    }
+  });
+
   return (
     <>
       <Head>
@@ -68,15 +77,6 @@ export const getStaticProps = async ({ params }: { params: { page: string; tag: 
   const tag = String(params.tag);
   const totalPages = getNumberOfPagesByTag(tag);
   const posts = getPostsByTagAndPage(page, tag);
-
-  if (page === 1) {
-    return {
-      redirect: {
-        destination: `/tags/${tag}`,
-        permanent: false,
-      },
-    };
-  }
 
   return {
     props: {
