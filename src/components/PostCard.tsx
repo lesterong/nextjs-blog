@@ -2,13 +2,15 @@ import Link from 'next/link';
 import Tag from '@/components/Tag';
 import DateTime from '@/components/DateTime';
 import Post from '../../types/post.type';
+import { useRouter } from 'next/router';
 
 type Props = {
   post: Post;
-  hideTag?: boolean;
 };
 
-const PostCard = ({ post, hideTag = false }: Props) => {
+const PostCard = ({ post }: Props) => {
+  const { pathname } = useRouter();
+  const hideTag = pathname.includes('/tags/');
   return (
     <article
       key={post.slug}
