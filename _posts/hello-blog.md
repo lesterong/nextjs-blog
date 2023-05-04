@@ -12,10 +12,10 @@ This blog `v0.1.0` currently supports the following features:
 - Most markdown commands (see [this post](./markdown-commands) for some examples)
 - Pagination
 - Syntax highlighting
+- Theme toggle
 
 The following features are currently being worked on:
 
-- Theme toggle. Currently, the theme follows the system preferences, and cannot be toggled manually
 - Table of contents when viewing posts
 - Navigation between posts
 

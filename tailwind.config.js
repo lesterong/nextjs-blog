@@ -9,6 +9,7 @@ module.exports = {
     themes: ['winter', 'forest'],
     darkTheme: 'forest',
   },
+  darkMode: ['class', '[data-theme="forest"]'], // https://github.com/saadeghi/daisyui/discussions/640#discussioncomment-4065361
   theme: {
     container: {
       center: true,
