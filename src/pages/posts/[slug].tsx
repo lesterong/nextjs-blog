@@ -1,4 +1,9 @@
-import { getPostBySlug, getPostsSlugs } from '../../../lib/api';
+import {
+  getNextPostBySlug,
+  getPostBySlug,
+  getPostsSlugs,
+  getPreviousPostBySlug,
+} from '../../../lib/api';
 import Post from '../../../types/post.type';
 import ReactMarkdown from 'react-markdown';
 import Tag from '../../components/Tag';
@@ -11,9 +16,11 @@ import Link from 'next/link';
 
 type Props = {
   post: Post;
+  previousPost: Post | null;
+  nextPost: Post | null;
 };
 
-const PostPage = ({ post }: Props) => {
+const PostPage = ({ post, previousPost, nextPost }: Props) => {
   return (
     <>
       <Head>
@@ -57,6 +64,24 @@ const PostPage = ({ post }: Props) => {
             {post.content}
           </ReactMarkdown>
         </div>
+        <nav className="mt-6 flex w-full">
+          {previousPost && (
+            <div className="flex flex-1 flex-col items-start">
+              <span className="text-xs font-bold uppercase">Previous Post</span>
+              <Link href={`./${previousPost.slug}`} className="link-primary inline-block max-w-fit">
+                {previousPost.title}
+              </Link>
+            </div>
+          )}
+          {nextPost && (
+            <div className="flex flex-1 flex-col items-end">
+              <span className="text-xs font-bold uppercase">Next Post</span>
+              <Link href={`./${nextPost.slug}`} className="link-primary inline-block max-w-fit">
+                {nextPost.title}
+              </Link>
+            </div>
+          )}
+        </nav>
       </article>
     </>
   );
@@ -81,10 +106,15 @@ export const getStaticPaths = async () => {
 };
 
 export const getStaticProps = async ({ params }: { params: { slug: string } }) => {
-  const post = getPostBySlug(params.slug);
+  const { slug } = params;
+  const post = getPostBySlug(slug);
+  const previousPost = getPreviousPostBySlug(slug);
+  const nextPost = getNextPostBySlug(slug);
   return {
     props: {
       post,
+      previousPost,
+      nextPost,
     },
   };
 };

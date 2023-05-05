@@ -13,11 +13,11 @@ This blog `v0.1.0` currently supports the following features:
 - Pagination
 - Syntax highlighting
 - Theme toggle
+- Navigation between posts
 
 The following features are currently being worked on:
 
 - Table of contents when viewing posts
-- Navigation between posts
 
 The following features are in consideration:
 
