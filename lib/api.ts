@@ -1,5 +1,6 @@
 import fs from 'fs';
 import matter from 'gray-matter';
+import Post from '../types/post.type';
 
 const POST_DIRECTORY = '_posts';
 const POSTS_PER_PAGE = 5;
@@ -77,4 +78,26 @@ export const getPostsByTagAndPage = (page: number, tag: string) => {
   const startIndex = (page - 1) * POSTS_PER_PAGE;
   const endIndex = page * POSTS_PER_PAGE;
   return posts.slice(startIndex, endIndex);
+};
+
+export const getPreviousPostBySlug = (slug: string) => {
+  const posts = getAllPosts();
+  const currentIndex = posts.findIndex((post) => post.slug === slug);
+
+  if (posts[currentIndex + 1]) {
+    return posts[currentIndex + 1];
+  }
+
+  return null;
+};
+
+export const getNextPostBySlug = (slug: string) => {
+  const posts = getAllPosts();
+  const currentIndex = posts.findIndex((post) => post.slug === slug);
+
+  if (posts[currentIndex - 1]) {
+    return posts[currentIndex - 1];
+  }
+
+  return null;
 };

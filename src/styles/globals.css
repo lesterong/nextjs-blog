@@ -27,7 +27,7 @@ body {
 }
 
 .link-underline::before {
-  @apply absolute bottom-0.5 left-0 h-0.5 w-0 bg-primary transition-width duration-100 content-[''];
+  @apply absolute bottom-0.5 left-0 -z-10 h-0.5 w-0 bg-primary transition-width duration-100 content-[''];
 }
 
 .link-underline:hover::before {

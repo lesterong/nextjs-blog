@@ -6,10 +6,20 @@ module.exports = {
     './src/app/**/*.{js,ts,jsx,tsx}',
   ],
   daisyui: {
-    themes: ['winter', 'forest'],
-    darkTheme: 'forest',
+    themes: [
+      {
+        light: {
+          ...require('daisyui/src/colors/themes')['[data-theme=winter]'],
+        },
+        dark: {
+          ...require('daisyui/src/colors/themes')['[data-theme=forest]'],
+          primary: '#0099FF',
+          secondary: '#00AAFF',
+        },
+      },
+    ],
   },
-  darkMode: ['class', '[data-theme="forest"]'], // https://github.com/saadeghi/daisyui/discussions/640#discussioncomment-4065361
+  darkMode: ['class', '[data-theme="dark"]'], // https://github.com/saadeghi/daisyui/discussions/640#discussioncomment-4065361
   theme: {
     container: {
       center: true,
