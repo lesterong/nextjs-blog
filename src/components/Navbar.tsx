@@ -47,13 +47,13 @@ const Navbar = () => {
   useEffect(() => {
     if (!localStorage.getItem('theme')) {
       if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
-        localStorage.setItem('theme', 'forest');
+        localStorage.setItem('theme', 'dark');
       } else {
-        localStorage.setItem('theme', 'winter');
+        localStorage.setItem('theme', 'light');
       }
     }
 
-    if (localStorage.getItem('theme') === 'forest') {
+    if (localStorage.getItem('theme') === 'dark') {
       setShowDark(true);
     } else {
       setShowDark(false);
@@ -80,7 +80,7 @@ const Navbar = () => {
         </Link>
         <div className="swap swap-rotate swap-active">
           <button
-            data-set-theme="forest"
+            data-set-theme="dark"
             className={`${!showDark ? 'swap-on z-10' : 'swap-off'} ${
               showDark === null && 'hidden'
             }`}
@@ -89,7 +89,7 @@ const Navbar = () => {
             <Sun />
           </button>
           <button
-            data-set-theme="winter"
+            data-set-theme="light"
             className={`${showDark ? 'swap-on z-10' : 'swap-off'} ${showDark === null && 'hidden'}`}
             onClick={() => setShowDark(false)}
           >
