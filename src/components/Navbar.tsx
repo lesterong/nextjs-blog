@@ -3,6 +3,7 @@ import Logo from '@/components/Logo';
 import { Figtree } from 'next/font/google';
 import { themeChange } from 'theme-change';
 import { useEffect, useState } from 'react';
+import Container from '@/components/Container';
 
 const figtree = Figtree({ subsets: ['latin'] });
 
@@ -66,38 +67,40 @@ const Navbar = () => {
     };
   }, []);
   return (
-    <nav
-      className={`container flex max-w-4xl items-center justify-between px-6 ${figtree.className}`}
-    >
-      <Link href="/" className="my-4 flex items-center">
-        <Logo />
-        &nbsp;&nbsp;|&nbsp;&nbsp;
-        <span className="font-bold uppercase">blog</span>
-      </Link>
-      <div className="flex items-center space-x-6">
-        <Link href="/tags" className="link-underline link">
-          Tags
+    <Container>
+      <nav className={`flex items-center justify-between ${figtree.className}`}>
+        <Link href="/" className="my-4 flex items-center">
+          <Logo />
+          &nbsp;&nbsp;|&nbsp;&nbsp;
+          <span className="font-bold uppercase">blog</span>
         </Link>
-        <div className="swap swap-rotate swap-active">
-          <button
-            data-set-theme="dark"
-            className={`${!showDark ? 'swap-on z-10' : 'swap-off'} ${
-              showDark === null && 'hidden'
-            }`}
-            onClick={() => setShowDark(true)}
-          >
-            <Sun />
-          </button>
-          <button
-            data-set-theme="light"
-            className={`${showDark ? 'swap-on z-10' : 'swap-off'} ${showDark === null && 'hidden'}`}
-            onClick={() => setShowDark(false)}
-          >
-            <Moon />
-          </button>
+        <div className="flex items-center space-x-6">
+          <Link href="/tags" className="link-underline link">
+            Tags
+          </Link>
+          <div className="swap swap-rotate swap-active">
+            <button
+              data-set-theme="dark"
+              className={`${!showDark ? 'swap-on z-10' : 'swap-off'} ${
+                showDark === null && 'hidden'
+              }`}
+              onClick={() => setShowDark(true)}
+            >
+              <Sun />
+            </button>
+            <button
+              data-set-theme="light"
+              className={`${showDark ? 'swap-on z-10' : 'swap-off'} ${
+                showDark === null && 'hidden'
+              }`}
+              onClick={() => setShowDark(false)}
+            >
+              <Moon />
+            </button>
+          </div>
         </div>
-      </div>
-    </nav>
+      </nav>
+    </Container>
   );
 };
 

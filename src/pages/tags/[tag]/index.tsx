@@ -6,6 +6,7 @@ import Head from 'next/head';
 import { toTitleCase } from '../../../../lib/utils';
 import Heading from '@/components/Heading';
 import PageNav from '@/components/PageNav';
+import Container from '@/components/Container';
 
 type Props = {
   tag: string;
@@ -20,13 +21,13 @@ const TagPage = ({ tag, posts, totalPages }: Props) => {
         <title>{`${toTitleCase(tag)} | ${SITE_TITLE}`}</title>
         <meta name="description" content={`In ${toTitleCase(tag)}`} />
       </Head>
-      <div className="container mx-auto max-w-4xl px-6">
+      <Container>
         <Heading title={`${tag}: Page 1`} />
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
         <PageNav page={1} totalPages={totalPages} renderPageLink={(page) => `${tag}/${page}`} />
-      </div>
+      </Container>
     </>
   );
 };

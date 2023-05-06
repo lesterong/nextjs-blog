@@ -8,6 +8,7 @@ import { toTitleCase } from '../../../../lib/utils';
 import PageNav from '@/components/PageNav';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Container from '@/components/Container';
 
 type Props = {
   posts: Post[];
@@ -30,7 +31,7 @@ const PaginatedPage = ({ posts, page, totalPages, tag }: Props) => {
         <title>{`${toTitleCase(tag)} Page ${page} | ${SITE_TITLE}`}</title>
         <meta name="description" content={`In ${toTitleCase(tag)}`} />
       </Head>
-      <div className="container mx-auto max-w-4xl px-6">
+      <Container>
         <Heading title={`${tag}: Page ${page}`} />
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
@@ -40,7 +41,7 @@ const PaginatedPage = ({ posts, page, totalPages, tag }: Props) => {
           totalPages={totalPages}
           renderPageLink={(page) => `../${tag}/${page}`}
         />
-      </div>
+      </Container>
     </>
   );
 };
