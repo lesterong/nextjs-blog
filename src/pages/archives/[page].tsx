@@ -7,6 +7,7 @@ import Post from '../../../types/post.type';
 import PageNav from '@/components/PageNav';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
+import Container from '@/components/Container';
 
 type Props = {
   posts: Post[];
@@ -28,13 +29,13 @@ const PaginatedPage = ({ posts, page, totalPages }: Props) => {
         <title>{`Archives Page ${page} | ${SITE_TITLE}`}</title>
         <meta name="description" content="A blog about tech" />
       </Head>
-      <div className="container mx-auto max-w-4xl px-6">
+      <Container>
         <Heading title={`Archives: Page ${page}`} />
         {posts.map((post) => (
           <PostCard key={post.slug} post={post} />
         ))}
         <PageNav page={page} totalPages={totalPages} renderPageLink={(page) => `${page}`} />
-      </div>
+      </Container>
     </>
   );
 };
