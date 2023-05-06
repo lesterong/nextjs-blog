@@ -5,6 +5,7 @@ import { SITE_TITLE } from '../../lib/constants';
 import Head from 'next/head';
 import Heading from '@/components/Heading';
 import Link from 'next/link';
+import Container from '@/components/Container';
 
 type Props = {
   posts: Post[];
@@ -18,7 +19,7 @@ const HomePage = ({ posts, hasArchives }: Props) => {
         <title>{SITE_TITLE}</title>
         <meta name="description" content="A blog about tech" />
       </Head>
-      <div className="container mx-auto max-w-4xl px-6">
+      <Container>
         <Heading
           title="Latest Posts"
           subtitle="Some of the things that have been keeping me up lately!"
@@ -31,7 +32,7 @@ const HomePage = ({ posts, hasArchives }: Props) => {
             View more
           </Link>
         )}
-      </div>
+      </Container>
     </>
   );
 };
