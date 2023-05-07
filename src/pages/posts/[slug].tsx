@@ -57,7 +57,11 @@ const PostPage = ({ post, previousPost, nextPost }: Props) => {
                 );
               },
               a({ href, children }) {
-                return <Link href={String(href)}>{children}</Link>;
+                return (
+                  <Link href={String(href)} rel="noreferrer">
+                    {children}
+                  </Link>
+                );
               },
             }}
           >
